@@ -6,5 +6,6 @@ all: .always
 	$(CMAKE) --build ./build --config Release --parallel 4
 	$(PYTHON) benchmark_json.py 1e3.json 1>/dev/null
 	./build/benchmark_jsontoolkit 1e3.json 1>/dev/null
+	./build/benchmark_simdjson 1e3.json 1>/dev/null
 
 .always:

@@ -6,6 +6,10 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -mtune=native")
 add_subdirectory(vendor/jsontoolkit)
 add_subdirectory(vendor/simdjson)
+
 add_executable(benchmark_jsontoolkit benchmark_jsontoolkit.cc)
 noa_add_default_options(PRIVATE benchmark_jsontoolkit)
 target_link_libraries(benchmark_jsontoolkit PRIVATE sourcemeta::jsontoolkit::json)
+
+add_executable(benchmark_simdjson benchmark_simdjson.cc)
+target_link_libraries(benchmark_simdjson PRIVATE simdjson)
