@@ -12,7 +12,9 @@ public:
   // Constructors
   using Container =
       std::vector<Value, typename Value::template Allocator<Value>>;
-  JSONArray() : data{} {}
+  JSONArray() : data{} {
+    this->data.reserve(1000);
+  }
   JSONArray(std::initializer_list<Value> values) : data{values} {}
 
   // Operators
