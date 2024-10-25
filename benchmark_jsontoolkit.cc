@@ -20,9 +20,9 @@ int main(int, char **argv) {
   sourcemeta::jsontoolkit::stringify(schema, output);
   const auto timestamp_stringify_end{std::chrono::high_resolution_clock::now()};
 
-  const auto duration_parse{std::chrono::duration_cast<std::chrono::milliseconds>(
+  const auto duration_parse{std::chrono::duration_cast<std::chrono::microseconds>(
       timestamp_parse_end - timestamp_parse_start)};
-  const auto duration_stringify{std::chrono::duration_cast<std::chrono::milliseconds>(
+  const auto duration_stringify{std::chrono::duration_cast<std::chrono::microseconds>(
       timestamp_stringify_end - timestamp_stringify_start)};
 
   std::cerr << "Parse time: " << duration_parse << "\n";
