@@ -19,7 +19,16 @@ int main(int argc, char **argv) {
         const auto timestamp_parse_start{std::chrono::high_resolution_clock::now()};
         simdjson::padded_string json = simdjson::padded_string::load(input_file.string());
         auto doc = parser.iterate(json);
+
+        // Force evaluation of every value
+        auto array = doc.get_array();
+        std::size_t count{0};
+        for (auto number : array) {
+          count += 1;
+        }
+
         const auto timestamp_parse_end{std::chrono::high_resolution_clock::now()};
+
 
         // Stringify
         const auto timestamp_stringify_start{std::chrono::high_resolution_clock::now()};
