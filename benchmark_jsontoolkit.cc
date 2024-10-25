@@ -1,16 +1,28 @@
 #include <sourcemeta/jsontoolkit/json.h>
 
+#include <fstream>
 #include <sstream>
 #include <iostream>
 #include <chrono>
 
+std::string read_file(const std::string& filepath) {
+    std::ifstream file(filepath);
+    if (!file.is_open()) {
+        throw std::runtime_error("Could not open file: " + filepath);
+    }
+    return std::string(std::istreambuf_iterator<char>(file),
+                      std::istreambuf_iterator<char>());
+}
+
 int main(int, char **argv) {
   const std::filesystem::path input_file{argv[1]};
-  auto stream{sourcemeta::jsontoolkit::read_file(input_file)};
+  std::ifstream file{input_file};
+  const std::string data{std::istreambuf_iterator<char>(file),
+                      std::istreambuf_iterator<char>()};
 
   // Parse
   const auto timestamp_parse_start{std::chrono::high_resolution_clock::now()};
-  const auto schema{sourcemeta::jsontoolkit::parse(stream)};
+  const auto schema{sourcemeta::jsontoolkit::parse(data)};
   const auto timestamp_parse_end{std::chrono::high_resolution_clock::now()};
 
   std::ostringstream output;
